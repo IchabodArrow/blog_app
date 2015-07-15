@@ -1,4 +1,10 @@
 <div>
+  <% if flash[:errors] %>
+    <% flash[:errors].each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  <% end %>
+
   <%= form_for @post do |f| %>
     <label for="title">
       Title: <%= f.text_field :title %>
@@ -6,7 +12,7 @@
 
     <br />
 
-    <% @categories.each_with_index do |category, index| %>
+    <% categories.each_with_index do |category, index| %>
       <label><input type="checkbox" value="<%= index + 1 %>" /> <%= category %> </label>
     <% end %>
 

@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def new
     @post = Post.new
-    @categories = %w(politics sports entertainment technology health)
   end
 
   def create
@@ -10,6 +9,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post
     else
+      flash[:errors] = @post.errors.full_messages
       render :new
     end
   end
