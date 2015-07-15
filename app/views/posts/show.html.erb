@@ -1,4 +1,4 @@
-<h1><%= @post.title %></h1>
+<h1><%= @post.title %></h1> by <%= @post.author.name %>
 <div><%= @post.content %></div>
 <% if @post.categories.present? %>
   <div>This post is tagged with <%= @post.categories.map(&:name).join(', ') %></div>

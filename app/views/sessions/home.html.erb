@@ -1,3 +1,3 @@
 <%= link_to 'Logout', session_path(session[:user_id]), method: :delete %>
 
-Welcome to home page!
+Welcome, <%= current_user.name %> to home page!

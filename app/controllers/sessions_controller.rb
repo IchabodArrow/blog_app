@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_filter :authenticate_user!, only: [:home, :destroy]
+
   def new
   end
 
@@ -14,9 +16,6 @@ class SessionsController < ApplicationController
   end
 
   def home
-    current_user = User.where(id: session[:user_id]).first
-
-    redirect_to login_path unless current_user
   end
 
   def destroy
