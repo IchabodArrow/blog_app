@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_filter :authenticate_user!, only: [:new]
+  before_filter :find_post, only: [:show, :edit, :update]
+  before_filter :authorized_user!, only: [:edit, :update]
 
   def new
     @post = Post.new
@@ -18,20 +20,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
   end
 
   def index
   end
 
   def edit
-    @post = Post.find(params[:id])
-
-    redirect_to home_path unless @post.author == current_user
   end
 
   def update
-    @post = Post.find(params[:id])
     @post.category_ids = Category.where(name: params[:post][:category_ids]).pluck(:id)
 
     if @post.update_attributes(permitted_post_params)
@@ -40,12 +37,19 @@ class PostsController < ApplicationController
       flash[:errors] = @post.errors.full_messages
       render :edit
     end
-
   end
 
   private
 
   def permitted_post_params
     params.require(:post).permit(:title, :content)
+  end
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
+
+  def authorized_user!
+    redirect_to @post unless @post.author == current_user
   end
 end
