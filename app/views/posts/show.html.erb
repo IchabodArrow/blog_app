@@ -1,5 +1,24 @@
+<% if flash[:errors] %>
+  <% flash[:errors].each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+<% end %>
+
 <h1><%= @post.title %></h1> by <%= @post.author.name %>
 <div><%= @post.content %></div>
 <% if @post.categories.present? %>
   <div>This post is tagged with <%= @post.categories.map(&:name).join(', ') %></div>
 <% end %>
+
+<div class="comments">
+  Comments for this post:
+
+  <% @post.comments.each do |comment| %>
+    <div>
+      <%= comment.message %> by <%= comment.commenter.name %>
+    </div>
+  <% end %>
+
+  <br/><br/>
+  <%= render 'comments/new_comment', comment: @post.comments.new %>
+</div>
