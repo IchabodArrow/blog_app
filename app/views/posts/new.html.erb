@@ -1,0 +1,22 @@
+<div>
+  <%= form_for @post do |f| %>
+    <label for="title">
+      Title: <%= f.text_field :title %>
+    </label>
+
+    <br />
+
+    <% @categories.each_with_index do |category, index| %>
+      <label><input type="checkbox" value="<%= index + 1 %>" /> <%= category %> </label>
+    <% end %>
+
+    <br />
+    
+    Content: <br/>
+    <%= f.text_area :content, rows: 25, cols: 100 %>
+
+    <br />
+
+    <%= f.submit 'Create Post' %>
+  <% end %>
+</div>
