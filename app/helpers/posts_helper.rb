@@ -1,5 +1,5 @@
 module PostsHelper
   def categories
-    %w(politics sports entertainment technology health)
+    Hash[Category.all.map { |c| [c.id, c.name] }]
   end
 end

@@ -12,8 +12,8 @@
 
     <br />
 
-    <% categories.each_with_index do |category, index| %>
-      <label><input type="checkbox" value="<%= index + 1 %>" /> <%= category %> </label>
+    <% categories.each do |id, category| %>
+      <%= check_box_tag 'post[category_ids][]', category %> <%= category %>
     <% end %>
 
     <br />

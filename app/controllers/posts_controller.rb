@@ -5,6 +5,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(permitted_post_params)
+    @post.category_ids = Category.where(name: params[:post][:category_ids]).pluck(:id)
 
     if @post.save
       redirect_to @post

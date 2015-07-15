@@ -1,2 +1,5 @@
 <h1><%= @post.title %></h1>
 <div><%= @post.content %></div>
+<% if @post.categories.present? %>
+  <div>This post is tagged with <%= @post.categories.map(&:name).join(', ') %></div>
+<% end %>
