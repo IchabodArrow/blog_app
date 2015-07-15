@@ -1,0 +1,22 @@
+<h1>Signup</h1>
+<% if flash[:errors] %>
+  <% flash[:errors].each do |message| %>
+    <div><%= message %></div>
+  <% end %>
+<% end %>
+
+<%= form_for @user do |f| %>
+  <label>
+    Name: <%= f.text_field :name %>
+  </label>
+  <label>
+    Email: <%= f.email_field :email %>
+  </label>
+  <label>
+    Password: <%= f.password_field :password %>
+  </label>
+  <label>
+    Confirm Password: <%= f.password_field :password_confirmation %>
+  </label>
+  <%= f.submit 'Sign Up' %>
+<% end %>
