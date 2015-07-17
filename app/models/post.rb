@@ -7,4 +7,10 @@ class Post < ActiveRecord::Base
   has_many :comments
 
   validates :title, :content, presence: true
+
+
+  def self.search(string)
+  	
+  	Post.where("content LIKE ? OR title LIKE ? ", "%#{string}%", "%#{string}%")
+  end
 end

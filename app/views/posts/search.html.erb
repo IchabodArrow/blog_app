@@ -1,0 +1,11 @@
+<h1>Listing posts</h1>
+<%@posts.each do|post|%>
+	<h3>
+	<%= link_to post.title, post_path(post) %></h3>
+	<p><%= post.try(:content) %></p>
+
+	<br>
+<% end %>
+
+
+<%= link_to 'Back', posts_path %>
